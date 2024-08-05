@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Kavivanar&family=Noto+Naskh+Arabic:wght@400..700&family=Noto+Rashi+Hebrew:wght@100..900&display=swap');
+
+.kavivanar-regular {
+  font-family: "Kavivanar", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  z-index: 50;
+  transition: all .2s ease-in-out;
+  font-size: 16px;
+}
+@import "./variables.scss";

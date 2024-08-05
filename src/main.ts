@@ -1,6 +1,12 @@
 import { createApp } from 'vue';
-import App from './App.vue';
+import { OhVueIcon, addIcons } from 'oh-vue-icons';
+import { FaFlag, RiZhihuFill, CoHamburgerMenu } from 'oh-vue-icons/icons';
 import router from './router';
 import store from './store';
+import App from './App.vue';
 
-createApp(App).use(store).use(router).mount('#app');
+addIcons(FaFlag, RiZhihuFill, CoHamburgerMenu);
+
+const app = createApp(App);
+app.component('v-icon', OhVueIcon);
+app.use(store).use(router).mount('#app');
