@@ -1,11 +1,25 @@
 import { createApp } from 'vue';
 import { OhVueIcon, addIcons } from 'oh-vue-icons';
-import { FaFlag, RiZhihuFill, CoHamburgerMenu } from 'oh-vue-icons/icons';
+import {
+  CoHamburgerMenu,
+  PrMapMarker,
+  MdSearchRound,
+  BiCaretUpFill,
+  RiShoppingCartLine,
+  RiShoppingCartFill,
+} from 'oh-vue-icons/icons';
 import router from './router';
 import store from './store';
 import App from './App.vue';
 
-addIcons(FaFlag, RiZhihuFill, CoHamburgerMenu);
+addIcons(
+  CoHamburgerMenu,
+  PrMapMarker,
+  MdSearchRound,
+  BiCaretUpFill,
+  RiShoppingCartLine,
+  RiShoppingCartFill,
+);
 
 const app = createApp(App);
 app.component('v-icon', OhVueIcon);
