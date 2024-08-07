@@ -53,16 +53,15 @@ export default defineComponent({
 <style lang="scss">
 @import "@/styles/variables";
 .sub-header {
-  display: flex;
-  //display: grid;
-  //grid-template-columns: auto 30% auto;
+  // display: flex;
+  display: grid;
+  grid-template-columns: auto 50% auto;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   //justify-content: center;
   width: 100%;
   padding: 5px 2.5px;
   background-color: $tsl-3-dark;
-  gap: 15px;
 
   .firstSec {
     display: flex;
@@ -85,9 +84,4 @@ export default defineComponent({
   }
 }
 
-@media (min-width: 1090px) {
-  .sub-header {
-    gap: 10px;
-  }
-}
 </style>
