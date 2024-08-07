@@ -59,15 +59,20 @@ export default defineComponent({
   align-items: center;
   justify-content: space-evenly;
   //justify-content: center;
+  gap: 10px;
   width: 100%;
   padding: 5px 2.5px;
   background-color: $tsl-3-dark;
+
+  .firstSec {
+    width: 100%;
+  }
 
   .shopSec, .firstSec {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    gap: 5px;
+    gap: 10px;
   }
 
   .searchSec {
@@ -75,9 +80,59 @@ export default defineComponent({
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 1em 1em;
+    padding: 1em 0em;
   }
 
+  .shopSec {
+    gap: 20px;
+  }
+
+  @media(max-width: 860px) {
+    .firstSec  {
+      justify-content: flex-start;
+    }
+  }
+
+  @media (max-width: 980px) {
+    .firstSec {
+      gap: 0px;
+    }
+  }
+
+  @media (max-width: 1115px) {
+    .shopSec {
+      gap: 10px;
+    }
+  }
+
+}
+
+@media (max-width: 580px) {
+  .sub-header {
+    justify-content: flex-start;
+    grid-template-columns: 10% 50% 15%;
+    gap: 40px;
+    padding-left: 15px;
+  }
+}
+
+@media (max-width: 750px) and (min-width: 580px) {
+  .sub-header {
+    grid-template-columns: 20% 50% 12%;
+    gap: 0px;
+  }
+}
+
+@media (max-width: 858px) and (min-width: 750px){
+  .sub-header {
+    grid-template-columns: 25% auto 12%;
+  }
+}
+
+@media (max-width: 1115px) and (min-width: 858px) {
+  .sub-header {
+    grid-template-columns: 37% auto 12%;
+  }
 }
 
 </style>

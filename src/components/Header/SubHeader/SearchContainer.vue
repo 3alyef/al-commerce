@@ -24,7 +24,7 @@
         name="search-input"
         type="text"
         v-model="searchContent"
-        placeholder="Pesquisar al.commerce.com"
+        :placeholder="windowWidth > 750 ? 'Pesquisar al.commerce.com' : 'Pesquisar'"
         />
       </label>
       <span class="searchBtn">
@@ -78,7 +78,21 @@ export default defineComponent({
       openCategory,
       isOpen,
       selected,
+      windowWidth: window.innerWidth,
     };
+  },
+  mounted() {
+    this.$nextTick(() => {
+      window.addEventListener('resize', this.onResize);
+    });
+  },
+  beforeUnmount() {
+    window.removeEventListener('resize', this.onResize);
+  },
+  methods: {
+    onResize() {
+      this.windowWidth = window.innerWidth;
+    },
   },
 });
 </script>
@@ -87,8 +101,9 @@ export default defineComponent({
 @import "@/styles/variables";
 
 .searchContainer {
-  display: flex;
-  align-items: stretch;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 29% 72.5%;
 
   .openCategoryBtn {
     display: flex;
@@ -139,6 +154,7 @@ export default defineComponent({
       font-weight: 400;
       line-height: normal;
       padding-left: 5px;
+      font-size: 18px;
     }
   }
 

@@ -36,4 +36,10 @@ export default defineComponent({
   cursor: pointer;
   background-color: $white;
 }
+
+@media (max-width: 995px) {
+  .loginBtn {
+    padding: 8px;
+  }
+}
 </style>

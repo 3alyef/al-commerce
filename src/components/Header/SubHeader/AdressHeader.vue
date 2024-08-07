@@ -1,11 +1,18 @@
 <template>
   <a class="adressHeader" href="#">
-    <span>
+    <span class="localLogo" >
       <v-icon name="pr-map-marker" scale="1.1"/>
     </span>
-    <div class="adressContainer">
-      <div class="pAdress">A entrega será feita em {{ city }} {{ cep }}</div>
-      <div class="h3Adress">Atualizar CEP</div>
+    <div class="adressContainer"  v-if="windowWidth >= 630">
+      <p class="pAdress">
+        <span class="subData">
+          A entrega será feita em
+        </span>
+        {{ ` ${city}` }} {{ cep }}
+      </p>
+      <p class="h3Adress">
+        Atualizar CEP
+      </p>
     </div>
   </a>
 </template>
@@ -25,6 +32,24 @@ export default defineComponent({
       required: true,
     },
   },
+  data() {
+    return {
+      windowWidth: window.innerWidth,
+    };
+  },
+  mounted() {
+    this.$nextTick(() => {
+      window.addEventListener('resize', this.onResize);
+    });
+  },
+  beforeUnmount() {
+    window.removeEventListener('resize', this.onResize);
+  },
+  methods: {
+    onResize() {
+      this.windowWidth = window.innerWidth;
+    },
+  },
 });
 </script>
 
@@ -38,10 +63,8 @@ export default defineComponent({
   gap: 5px;
   color: white;
   text-decoration: none;
-  width: 245px;
-  max-width: 50%;
 
-  span {
+  .localLogo {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -71,6 +94,16 @@ export default defineComponent({
       line-height: 15px;
       font-weight: 700;
     }
+  }
+}
+
+@media (max-width: 645px) {
+
+}
+
+@media (max-width: 780px) {
+  .subData {
+    display: none;
   }
 }
 

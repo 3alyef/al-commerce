@@ -34,7 +34,37 @@ export default defineComponent({
     aspect-ratio: 1/1;
     width: 4em;
   }
+
+  @media (max-width: 625px) {
+    h1 {
+      display: none;
+    }
+
+    .eLogo {
+      width: 3em;
+    }
+  }
+
+  @media (max-width: 870px) and (min-width: 625px) {
+    h1 {
+      display: none;
+    }
+
+    .eLogo {
+      width: 4em;
+    }
+  }
+
+  @media (max-width: 1030px) and (min-width: 870px) {
+    h1 {
+      font-size: 14px;
+    }
+
+    .eLogo {
+      width: 3em;
+    }
+  }
+
 }
 
-//@media (max-width: )
 </style>
