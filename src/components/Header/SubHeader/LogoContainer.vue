@@ -35,4 +35,6 @@ export default defineComponent({
     width: 4em;
   }
 }
+
+//@media (max-width: )
 </style>

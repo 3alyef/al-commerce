@@ -1,3 +1,4 @@
+@import "./display.scss";
 
 $tsl-1: #154074;
 $tsl-2: #37669F;
@@ -8,3 +9,8 @@ $tsl-5: #A5C9F4;
 $white: #FFF;
 $black-transparent: rgb(0 0 0 / 68%);
 $inputColor: #A0A0A0;
+$hoverColor: #00000017;
+$selectColor: #cfe1fbe8;
+$activeSelectedColor: #a7b6ca;
+$activeSimpleColor: #00000025;
+$selectedBgColor: rgba(207, 225, 251, .91);

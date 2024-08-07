@@ -1,10 +1,16 @@
 <template>
   <div class="sub-header">
-    <LogoContainer />
-    <AdressHeader :cep="cep" :city="city"/>
-    <SearchContainer :category="category" :search="search" />
-    <LoginComponent />
-    <ShopCar />
+    <span class="firstSec">
+      <LogoContainer />
+      <AdressHeader :cep="cep" :city="city"/>
+    </span>
+    <span class="searchSec">
+      <SearchContainer :category="category" :search="search" />
+    </span>
+    <span class="shopSec">
+      <LoginComponent />
+      <ShopCar />
+    </span>
   </div>
 </template>
 
@@ -48,13 +54,40 @@ export default defineComponent({
 @import "@/styles/variables";
 .sub-header {
   display: flex;
-  justify-content: center;
+  //display: grid;
+  //grid-template-columns: auto 30% auto;
   align-items: center;
-  gap: 80px;
+  justify-content: center;
+  //justify-content: center;
   width: 100%;
-  padding: 5px 17px;
+  padding: 5px 2.5px;
   background-color: $tsl-3-dark;
+  gap: 15px;
 
+  .firstSec {
+    display: flex;
+    align-items: center;
+    gap: 2.5%;
+  }
+
+  .searchSec {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1em 1em;
+  }
+
+  .shopSec {
+    display: flex;
+    align-items: center;
+    gap: 5%;
+  }
 }
 
+@media (min-width: 1090px) {
+  .sub-header {
+    gap: 10px;
+  }
+}
 </style>

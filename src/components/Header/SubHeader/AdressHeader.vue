@@ -1,13 +1,13 @@
 <template>
-  <div class="adressHeader">
+  <a class="adressHeader" href="#">
     <span>
-      <v-icon name="pr-map-marker" />
+      <v-icon name="pr-map-marker" scale="1.1"/>
     </span>
-    <div>
-      <p>A entrega será feita em {{ city }} {{ cep }}</p>
-      <h3>Atualizar CEP</h3>
+    <div class="adressContainer">
+      <div class="pAdress">A entrega será feita em {{ city }} {{ cep }}</div>
+      <div class="h3Adress">Atualizar CEP</div>
     </div>
-  </div>
+  </a>
 </template>
 
 <script lang="ts">
@@ -37,6 +37,9 @@ export default defineComponent({
   padding: 5px;
   gap: 5px;
   color: white;
+  text-decoration: none;
+  width: 245px;
+  max-width: 50%;
 
   span {
     display: flex;
@@ -45,22 +48,28 @@ export default defineComponent({
     font-size: 24px;
   }
 
-  div {
+  .adressContainer {
     display: flex;
     flex-direction: column;
     min-height: 40px;
     align-items: flex-start;
+    justify-content: center;
     font-size: 12px;
     gap: 5px;
     cursor: pointer;
 
-    p {
-      font-size: 11.9px;
-      font-weight: 300;
+    .pAdress {
+      font-size: 12px;
+      line-height: 14px;
+      height: 14px;
+      font-weight: 400;
+      display: inline-table;
     }
 
-    h3 {
-      font-weight: 600;
+    .h3Adress {
+      font-size: 14px;
+      line-height: 15px;
+      font-weight: 700;
     }
   }
 }

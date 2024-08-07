@@ -12,29 +12,39 @@
         name="bi-caret-up-fill"
         :class="isOpen ? undefined : 'invertObj'" />
       </h2>
+      <span class="optSubContainer">
+        <OptionsComponent :isOn="isOpen" :whatOneSelected="selected"
+        :topBottomStyle="{top: '2.5px'}"/>
+      </span>
     </div>
-    <label for="search-input" class="search-input-container">
-      <input
-      id="search-input"
-      name="search-input"
-      type="text"
-      v-model="searchContent"
-      placeholder="Pesquisar al.commerce.com"
-      />
-    </label>
-    <span class="searchBtn">
-      <button @click="handleSearch">
-        <v-icon name="md-search-round" scale="1.25"/>
-      </button>
-    </span>
+    <form @submit.prevent="handleSearch" method="GET" role="search" class="formSearch">
+      <label for="search-input" class="search-input-container">
+        <input
+        id="search-input"
+        name="search-input"
+        type="text"
+        v-model="searchContent"
+        placeholder="Pesquisar al.commerce.com"
+        />
+      </label>
+      <span class="searchBtn">
+        <button type="submit">
+          <v-icon name="md-search-round" scale="1.25"/>
+        </button>
+      </span>
+    </form>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+import OptionsComponent from '@/components/OptionsComponent/OptionsComponent.vue';
 
 export default defineComponent({
   name: 'SearchContainer',
+  components: {
+    OptionsComponent,
+  },
   props: {
     category: {
       type: String,
@@ -48,9 +58,11 @@ export default defineComponent({
   setup(props) {
     const searchContent = ref<string>('');
     const isOpen = ref<boolean>(false);
+    const selected = ref<string>('Livro');
 
     function handleSearch() {
       if (props.search) {
+        console.log('submit');
         props.search();
       }
     }
@@ -65,6 +77,7 @@ export default defineComponent({
       categoryName: props.category,
       openCategory,
       isOpen,
+      selected,
     };
   },
 });
@@ -75,18 +88,19 @@ export default defineComponent({
 
 .searchContainer {
   display: flex;
-  align-items: center;
+  align-items: stretch;
 
   .openCategoryBtn {
     display: flex;
     padding: 6px 11px;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 5px;
     border-radius: 5px 0px 0px 5px;
     background-color: $tsl-4;
     align-self: stretch;
     cursor: pointer;
+    position: relative;
 
     h2 {
       color: $black-transparent;
@@ -94,6 +108,16 @@ export default defineComponent({
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+
+    .optSubContainer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
     }
   }
 
@@ -104,6 +128,7 @@ export default defineComponent({
     gap: 10px;
     background-color: $white;
     align-self: stretch;
+    cursor: pointer;
 
     input {
       width: 100%;
@@ -134,6 +159,11 @@ export default defineComponent({
       background-color: transparent;
 
     }
+  }
+
+  .formSearch {
+    min-height: 100%;
+    display: flex;
   }
 }
 
