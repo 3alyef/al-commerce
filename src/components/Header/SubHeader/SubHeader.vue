@@ -55,7 +55,7 @@ export default defineComponent({
 .sub-header {
   // display: flex;
   display: grid;
-  grid-template-columns: auto 50% auto;
+  grid-template-columns: auto auto auto;
   align-items: center;
   justify-content: space-evenly;
   //justify-content: center;
@@ -63,10 +63,11 @@ export default defineComponent({
   padding: 5px 2.5px;
   background-color: $tsl-3-dark;
 
-  .firstSec {
-    display: flex;
+  .firstSec, .shopSec {
+    display: grid;
     align-items: center;
-    gap: 2.5%;
+    justify-content: space-evenly;
+    grid-template-columns: auto auto;
   }
 
   .searchSec {
@@ -77,11 +78,6 @@ export default defineComponent({
     padding: 1em 1em;
   }
 
-  .shopSec {
-    display: flex;
-    align-items: center;
-    gap: 5%;
-  }
 }
 
 </style>
