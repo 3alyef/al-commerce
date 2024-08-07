@@ -24,7 +24,7 @@
         name="search-input"
         type="text"
         v-model="searchContent"
-        :placeholder="windowWidth > 750 ? 'Pesquisar al.commerce.com' : 'Pesquisar'"
+        :placeholder="Number(windowWidth) > 750 ? 'Pesquisar al.commerce.com' : 'Pesquisar'"
         />
       </label>
       <span class="searchBtn">
@@ -37,7 +37,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import {
+  defineComponent, onBeforeUnmount, onMounted, ref,
+} from 'vue';
 import OptionsComponent from '@/components/OptionsComponent/OptionsComponent.vue';
 
 export default defineComponent({
@@ -59,6 +61,7 @@ export default defineComponent({
     const searchContent = ref<string>('');
     const isOpen = ref<boolean>(false);
     const selected = ref<string>('Livro');
+    const windowWidth = ref<number>(window.innerWidth);
 
     function handleSearch() {
       if (props.search) {
@@ -71,6 +74,18 @@ export default defineComponent({
       isOpen.value = !isOpen.value;
     }
 
+    const onResize = () => {
+      windowWidth.value = window.innerWidth;
+    };
+
+    onMounted(() => {
+      window.addEventListener('resize', onResize);
+    });
+
+    onBeforeUnmount(() => {
+      window.removeEventListener('resize', onResize);
+    });
+
     return {
       searchContent,
       handleSearch,
@@ -78,21 +93,8 @@ export default defineComponent({
       openCategory,
       isOpen,
       selected,
-      windowWidth: window.innerWidth,
+      windowWidth,
     };
-  },
-  mounted() {
-    this.$nextTick(() => {
-      window.addEventListener('resize', this.onResize);
-    });
-  },
-  beforeUnmount() {
-    window.removeEventListener('resize', this.onResize);
-  },
-  methods: {
-    onResize() {
-      this.windowWidth = window.innerWidth;
-    },
   },
 });
 </script>
@@ -103,7 +105,7 @@ export default defineComponent({
 .searchContainer {
   width: 100%;
   display: grid;
-  grid-template-columns: 29% 72.5%;
+  grid-template-columns: auto 72.5%;
 
   .openCategoryBtn {
     display: flex;
@@ -160,11 +162,10 @@ export default defineComponent({
 
   .searchBtn {
     display: flex;
-    width: 40px;
+    width: 50px;
     align-self: stretch;
     justify-content: center;
     align-items: center;
-    gap: 10px;
     border-radius: 0px 5px 5px 0px;
     background-color: $tsl-4;
 

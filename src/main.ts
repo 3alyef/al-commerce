@@ -7,6 +7,7 @@ import {
   BiCaretUpFill,
   RiShoppingCartLine,
   RiShoppingCartFill,
+  GiHamburgerMenu,
 } from 'oh-vue-icons/icons';
 import router from './router';
 import store from './store';
@@ -19,6 +20,7 @@ addIcons(
   BiCaretUpFill,
   RiShoppingCartLine,
   RiShoppingCartFill,
+  GiHamburgerMenu,
 );
 
 const app = createApp(App);

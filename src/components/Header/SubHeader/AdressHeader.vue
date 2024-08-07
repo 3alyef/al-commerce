@@ -3,7 +3,7 @@
     <span class="localLogo" >
       <v-icon name="pr-map-marker" scale="1.1"/>
     </span>
-    <div class="adressContainer"  v-if="windowWidth >= 630">
+    <div class="adressContainer"  v-if="Number(windowWidth) >= 630">
       <p class="pAdress">
         <span class="subData">
           A entrega será feita em
@@ -18,7 +18,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import {
+  defineComponent, onBeforeUnmount, onMounted, ref,
+} from 'vue';
 
 export default defineComponent({
   name: 'AdressHeader',
@@ -32,23 +34,31 @@ export default defineComponent({
       required: true,
     },
   },
-  data() {
-    return {
-      windowWidth: window.innerWidth,
+  setup() {
+    const category = ref<string>('Livros');
+    const windowWidth = ref<number>(window.innerWidth);
+
+    function search() {
+      console.log('On search');
+    }
+
+    const onResize = () => {
+      windowWidth.value = window.innerWidth;
     };
-  },
-  mounted() {
-    this.$nextTick(() => {
-      window.addEventListener('resize', this.onResize);
+
+    onMounted(() => {
+      window.addEventListener('resize', onResize);
     });
-  },
-  beforeUnmount() {
-    window.removeEventListener('resize', this.onResize);
-  },
-  methods: {
-    onResize() {
-      this.windowWidth = window.innerWidth;
-    },
+
+    onBeforeUnmount(() => {
+      window.removeEventListener('resize', onResize);
+    });
+
+    return {
+      category,
+      search,
+      windowWidth,
+    };
   },
 });
 </script>

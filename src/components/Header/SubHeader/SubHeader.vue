@@ -5,17 +5,22 @@
       <AdressHeader :cep="cep" :city="city"/>
     </span>
     <span class="searchSec">
-      <SearchContainer :category="category" :search="search" />
+      <SearchContainer :category="category" :search="search"/>
     </span>
-    <span class="shopSec">
+    <span class="shopSec" v-if="windowWidth >= 415">
       <LoginComponent />
       <ShopCar />
+    </span>
+    <span class="burgerMenu" v-else>
+      <v-icon name="gi-hamburger-menu" scale="1.15"/>
     </span>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import {
+  defineComponent, onBeforeUnmount, onMounted, ref,
+} from 'vue';
 import AdressHeader from './AdressHeader.vue';
 import LogoContainer from './LogoContainer.vue';
 import SearchContainer from './SearchContainer.vue';
@@ -35,16 +40,30 @@ export default defineComponent({
     const city = ref<string>('Cocal');
     const cep = ref<number>(64235000);
     const category = ref<string>('Livros');
+    const windowWidth = ref<number>(window.innerWidth);
 
     function search() {
       console.log('On search');
     }
+
+    const onResize = () => {
+      windowWidth.value = window.innerWidth;
+    };
+
+    onMounted(() => {
+      window.addEventListener('resize', onResize);
+    });
+
+    onBeforeUnmount(() => {
+      window.removeEventListener('resize', onResize);
+    });
 
     return {
       city,
       cep,
       category,
       search,
+      windowWidth,
     };
   },
 });
@@ -87,6 +106,25 @@ export default defineComponent({
     gap: 20px;
   }
 
+  .burgerMenu {
+    cursor: pointer;
+    width: 2em;
+    border-radius: 8px;
+    background-color: $white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1/1;
+  }
+
+  .burgerMenu:hover {
+    background-color: $hoverColorBurger;
+  }
+
+  .burgerMenu:active {
+    background-color: $activeColorBurger;
+  }
+
   @media(max-width: 860px) {
     .firstSec  {
       justify-content: flex-start;
@@ -107,7 +145,15 @@ export default defineComponent({
 
 }
 
-@media (max-width: 460px) {
+@media (max-width: 415px) {
+  .sub-header {
+    grid-template-columns: 12% 50% 15%;
+    gap: 43px;
+    padding-left: 3px;
+  }
+}
+
+@media (max-width: 460px) and (min-width: 415px) {
   .sub-header {
     justify-content: flex-start;
     grid-template-columns: 12% 50% 15%;
