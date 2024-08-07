@@ -107,7 +107,16 @@ export default defineComponent({
 
 }
 
-@media (max-width: 580px) {
+@media (max-width: 460px) {
+  .sub-header {
+    justify-content: flex-start;
+    grid-template-columns: 12% 50% 15%;
+    gap: 30px;
+    padding-left: 3px;
+  }
+}
+
+@media (max-width: 580px) and (min-width: 460px) {
   .sub-header {
     justify-content: flex-start;
     grid-template-columns: 10% 50% 15%;
