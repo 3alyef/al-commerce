@@ -63,17 +63,11 @@ export default defineComponent({
   padding: 5px 2.5px;
   background-color: $tsl-3-dark;
 
-  .firstSec{
+  .shopSec, .firstSec {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-  }
-
-  .shopSec {
-    display: grid;
-    align-items: center;
-    justify-content: space-evenly;
-    grid-template-columns: auto auto;
+    gap: 5px;
   }
 
   .searchSec {
