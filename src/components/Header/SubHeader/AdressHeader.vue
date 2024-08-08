@@ -1,7 +1,7 @@
 <template>
   <a class="adressHeader" href="#">
     <span class="localLogo" >
-      <v-icon name="pr-map-marker" scale="1.1"/>
+      <v-icon name="pr-map-marker" scale="1.1"/> {{  windowWidth  }}
     </span>
     <div class="adressContainer"  v-if="Number(windowWidth) >= 630">
       <p class="pAdress">
