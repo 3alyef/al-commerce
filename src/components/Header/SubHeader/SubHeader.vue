@@ -11,9 +11,20 @@
       <LoginComponent />
       <ShopCar />
     </span>
-    <span class="burgerMenu" v-else>
+    <span class="burgerMenu"
+    @click="openCategory"
+    @keydown.enter="openCategory"
+    tabindex="0"
+    role="button"
+    v-else>
       <v-icon name="gi-hamburger-menu" scale="1.15"/>
+      <span class="optSubContainer"
+            :style="{ right: optSubContainerWidth, top: '71px' }" ref="optSubContainer">
+        <OptionsComponent :isOn="isOpen"
+        :topBottomStyle="{top: '2.5px'}"/>
+      </span>
     </span>
+
   </div>
 </template>
 
@@ -26,6 +37,7 @@ import LogoContainer from './LogoContainer.vue';
 import SearchContainer from './SearchContainer.vue';
 import LoginComponent from './LoginComponent.vue';
 import ShopCar from './ShopCar.vue';
+import OptionsComponent from '../../OptionsComponent/OptionsComponent2.vue';
 
 export default defineComponent({
   name: 'SubHeader',
@@ -35,22 +47,38 @@ export default defineComponent({
     SearchContainer,
     LoginComponent,
     ShopCar,
+    OptionsComponent,
   },
   setup() {
     const city = ref<string>('Cocal');
     const cep = ref<number>(64235000);
     const category = ref<string>('Livros');
     const windowWidth = ref<number>(window.innerWidth);
+    const isOpen = ref<boolean>(false);
+    const optSubContainerWidth = ref<string>('0');
+    const optSubContainer = ref<HTMLElement | null>(null);
 
     function search() {
       console.log('On search');
     }
 
+    const updateOptSubContainerWidth = () => {
+      if (optSubContainer.value) {
+        const span = optSubContainer.value.querySelector('.optionsContainer-main') as HTMLElement;
+        if (span) {
+          const spanWidth = span.offsetWidth;
+          optSubContainerWidth.value = `-${spanWidth * 2.5}px`;
+        }
+      }
+    };
+
     const onResize = () => {
       windowWidth.value = window.innerWidth;
+      updateOptSubContainerWidth();
     };
 
     onMounted(() => {
+      updateOptSubContainerWidth();
       window.addEventListener('resize', onResize);
     });
 
@@ -58,12 +86,23 @@ export default defineComponent({
       window.removeEventListener('resize', onResize);
     });
 
+    function openCategory() {
+      isOpen.value = !isOpen.value;
+      if (!isOpen.value || Number(windowWidth) === 0) {
+        updateOptSubContainerWidth();
+      }
+    }
+
     return {
       city,
       cep,
       category,
       search,
       windowWidth,
+      isOpen,
+      openCategory,
+      optSubContainerWidth,
+      optSubContainer,
     };
   },
 });
@@ -143,6 +182,15 @@ export default defineComponent({
     }
   }
 
+}
+
+.optSubContainer {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
 }
 
 @media (max-width: 415px) {

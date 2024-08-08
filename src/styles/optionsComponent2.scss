@@ -1,0 +1,78 @@
+@import "./variables";
+
+.OptionsContainer-base {
+  position: relative;
+  transition: width .2s ease-in-out 0s;
+
+  .optionsContainer-main {
+    background-color: $white;
+    position: absolute;
+    display: inline-block;
+    overflow: auto;
+    // border-radius: 3px;
+    left: 1px;
+    will-change: transform, opacity;
+    line-height: 1.5rem;
+    font-size: .85rem;
+    letter-spacing: .00625em;
+    font-weight: 400;
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2),
+    0 6px 10px 0 rgba(0, 0, 0, .14),
+    0 5px 18px 0 rgba(0, 0, 0, .12);
+
+    ul {
+			display: flex;
+			flex-direction: column;
+			gap: .25em;
+			max-height: 13em;
+			overflow-y: scroll;
+			overflow-x: hidden;
+			padding: .25em 0;
+      max-height: 15em;
+      opacity: 1;
+      list-style: none;
+      margin: 0;
+
+      li {
+        color: #000;
+        cursor: pointer;
+        height: 2.5em;
+        transition: opacity 15ms linear, background-color 15ms linear;
+
+        div {
+          display: flex;
+          gap: .4375em;
+          align-items: center;
+          justify-content: space-between;
+          padding: .2em .5em;
+					cursor: pointer;
+
+          span {
+            user-select: none;
+						cursor: pointer;
+          }
+        }
+      }
+
+      li:hover {
+        background-color: $hoverColor;
+      }
+
+      .liSelect{
+        background-color: $selectColor;
+      }
+
+      .liSelect:active {
+        background-color: $activeSelectedColor;
+      }
+
+      li:active {
+        background-color: $activeSimpleColor;
+      }
+
+      .isSelected {
+        background-color: $selectedBgColor;
+      }
+    }
+  }
+}
